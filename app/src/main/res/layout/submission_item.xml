@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cvItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardCornerRadius="1dp"
+        >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvKarma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5136"/>
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvKarma"
+                android:layout_toEndOf="@id/tvKarma"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:text="Nicky_and_Skittles"/>
+
+            <TextView
+                android:id="@+id/tvInDoNotUse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvUserName"
+                android:layout_toEndOf="@id/tvUserName"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="in"/>
+
+            <TextView
+                android:id="@+id/tvSubReddit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvInDoNotUse"
+                android:layout_toEndOf="@id/tvInDoNotUse"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:text="gaming"/>
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_below="@id/tvKarma"
+                android:paddingTop="5dp"
+                android:text="Pinnacle of creativity with grappling hook in Just Cause 3"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>
