@@ -1,4 +1,4 @@
-package com.jamesmaupin.readdit.View;
+package com.jamesmaupin.readdit.Views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
