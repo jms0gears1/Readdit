@@ -1,15 +1,14 @@
-package com.jamesmaupin.readdit;
+package com.jamesmaupin.readdit.View;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.jamesmaupin.readdit.R;
+import com.jamesmaupin.readdit.Adapters.SubmissionAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new SubmissionAdapter(30);
+        mAdapter = new SubmissionAdapter(0);
         mRecyclerView.setAdapter(mAdapter);
     }
 

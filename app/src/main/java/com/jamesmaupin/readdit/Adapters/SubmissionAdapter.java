@@ -1,9 +1,11 @@
-package com.jamesmaupin.readdit;
+package com.jamesmaupin.readdit.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.jamesmaupin.readdit.R;
 
 /**
  * Created by jmsgears on 1/1/16.
