@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jamesmaupin.readdit.Models.ThingModel;
 import com.jamesmaupin.readdit.R;
@@ -33,6 +34,10 @@ public class SubmissionAdapter extends RecyclerView.Adapter<SubmissionAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.tvKarma.setText(Integer.toString(things.get(position).data.score));
+        holder.tvUserName.setText(things.get(position).data.author);
+        holder.tvSubreddit.setText(things.get(position).data.subreddit);
+        holder.tvTitle.setText(things.get(position).data.title);
     }
 
     @Override
@@ -41,8 +46,19 @@ public class SubmissionAdapter extends RecyclerView.Adapter<SubmissionAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView tvKarma;
+        public TextView tvUserName;
+        public TextView tvSubreddit;
+        public TextView tvTitle;
+
         public ViewHolder(View itemView) {
             super(itemView);
+            View card = itemView.findViewById(R.id.cvItem).findViewById(R.id.relativeLayout);
+            tvKarma = (TextView) card.findViewById(R.id.tvKarma);
+            tvUserName = (TextView) card.findViewById(R.id.tvUserName);
+            tvSubreddit = (TextView) card.findViewById(R.id.tvSubReddit);
+            tvTitle = (TextView) card.findViewById(R.id.tvTitle);
         }
     }
 }

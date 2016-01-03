@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface SubmissionView {
     void setSubmissions(List<ThingModel> submissions);
+    void setAuthoToken(String bearer);
+    void showError(String error);
 }

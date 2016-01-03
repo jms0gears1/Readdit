@@ -2,12 +2,7 @@ package com.jamesmaupin.readdit.Factories;
 
 import android.util.Base64;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.jamesmaupin.readdit.Models.DataModel;
-import com.jamesmaupin.readdit.Models.ThingModel;
 import com.jamesmaupin.readdit.Utilities.Constants;
-import com.jamesmaupin.readdit.Utilities.GenericJsonDeserializer;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Response;
@@ -24,68 +19,53 @@ import retrofit.RxJavaCallAdapterFactory;
  */
 public class RetrofitClientFactory {
 
-    static OkHttpClient okHttpClient;
-    static HttpLoggingInterceptor loggingInterceptor;
-    static Interceptor authHeaderInterceptor;
-    static String base_url;
+    static OkHttpClient httpClient;
 
-    public static <C> C create(Class <C> mClass, String bearerToken){
-        okHttpClient = new OkHttpClient();
+    public static <C> C create(Class<C> clientClass, String bearerToken) {
+        String url;
 
+        httpClient = new OkHttpClient();
 
-        if(bearerToken==null) {
-            initHeaders("Basic " + Base64.encodeToString(Constants.CREDENTIALS.getBytes(), Base64.NO_WRAP));
-            base_url = Constants.BASE_URL;
-        }else {
-            initHeaders("bearer " + bearerToken);
-            base_url = Constants.OAUTH_BASE_URL;
+        if (bearerToken == null) {
+            setHeaders("Basic " + Base64.encodeToString(Constants.CREDENTIALS.getBytes(), Base64.NO_WRAP));
+            url = Constants.BASE_URL;
+        } else {
+            setHeaders("bearer " + bearerToken);
+            url = Constants.OAUTH_BASE_URL;
         }
 
-        return redditRetrofitClient(
-                mClass,
-                base_url);
+        return redditRetrofitClient(clientClass, url);
     }
 
-    private static void initHeaders(final String authentication){
-        loggingInterceptor = new HttpLoggingInterceptor();
+    private static void setHeaders(final String authorization) {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        authHeaderInterceptor = new Interceptor() {
+        Interceptor basicHeaderAuth = new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 return chain.proceed(
                         chain.request()
-                        .newBuilder()
-                        .addHeader("Authorization", authentication)
-                        .build()
+                                .newBuilder()
+                                .addHeader("Authorization", authorization)
+                                .build()
                 );
             }
         };
 
-        okHttpClient.interceptors().add(loggingInterceptor);
-        okHttpClient.interceptors().add(authHeaderInterceptor);
+        httpClient.interceptors().add(basicHeaderAuth);
+        httpClient.interceptors().add(loggingInterceptor);
     }
 
-    private static Gson buildGsonConverter(){
-        return new GsonBuilder()
-                .registerTypeAdapter(
-                        DataModel.class,
-                        new GenericJsonDeserializer<>(DataModel.class, "data")
-                )
-                .registerTypeAdapter(
-                        ThingModel.class,
-                        new GenericJsonDeserializer<>(ThingModel.class, "children")
-                )
-                .create();
-    }
+    public static <C> C redditRetrofitClient(Class<C> clientClass, String url) {
 
-    private static <C> C redditRetrofitClient(Class<C> mClass, String url){
-        return new Retrofit.Builder()
+        Retrofit client = new Retrofit.Builder()
                 .baseUrl(url)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(buildGsonConverter()))
+                .client(httpClient)
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build()
-                .create(mClass);
+                .build();
+
+        return client.create(clientClass);
     }
 }

@@ -7,28 +7,29 @@ import java.util.List;
  */
 public class DataModel {
     //A modhash is a token that the reddit API requires to help prevent CSRF
-    String modhash;
+    public String modhash;
     //Reddit's Thing is the basis of most Reddit JSON replies
-    List<ThingModel> children;
+    public List<ThingModel> children;
 
-    String domain;
-    String subreddit;
-    String id;
-    String author;
-    String thumbnail;
-    String permalink;
-    String url;
+    public String domain;
+    public String subreddit;
+    public String id;
+    public String author;
+    public String thumbnail;
+    public String permalink;
+    public String url;
+    public String title;
 
-    int score;
-    int num_comments;
-    int downs;
-    int ups;
+    public int score;
+    public int num_comments;
+    public int downs;
+    public int ups;
 
-    long created_utc;
+    public long created_utc;
 
-    boolean hide_score;
-    boolean edited;
-    boolean visited;
+    public boolean hide_score;
+    public boolean edited;
+    public boolean visited;
 
 
 
