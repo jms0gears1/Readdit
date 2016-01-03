@@ -7,15 +7,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.jamesmaupin.readdit.Models.ThingModel;
 import com.jamesmaupin.readdit.R;
 import com.jamesmaupin.readdit.Adapters.SubmissionAdapter;
 import com.jamesmaupin.readdit.Views.SubmissionView;
 
+import java.util.List;
+
 public class SubmissionActivity extends AppCompatActivity implements SubmissionView{
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private SubmissionAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private List<ThingModel> mSubmissions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,7 @@ public class SubmissionActivity extends AppCompatActivity implements SubmissionV
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new SubmissionAdapter(0);
+        mAdapter = new SubmissionAdapter(null);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -52,5 +56,11 @@ public class SubmissionActivity extends AppCompatActivity implements SubmissionV
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setSubmissions(List<ThingModel> submissions) {
+        mSubmissions = submissions;
+        mAdapter.changeData(mSubmissions);
     }
 }
