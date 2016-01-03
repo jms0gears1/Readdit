@@ -1,4 +1,4 @@
-package com.jamesmaupin.readdit.Views;
+package com.jamesmaupin.readdit.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +9,9 @@ import android.view.MenuItem;
 
 import com.jamesmaupin.readdit.R;
 import com.jamesmaupin.readdit.Adapters.SubmissionAdapter;
+import com.jamesmaupin.readdit.Views.SubmissionView;
 
-public class MainActivity extends AppCompatActivity {
+public class SubmissionActivity extends AppCompatActivity implements SubmissionView{
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
